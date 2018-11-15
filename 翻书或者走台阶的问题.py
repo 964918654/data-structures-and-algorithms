@@ -16,3 +16,31 @@ print(A(10))
 #   2.时间复杂度为指数级
 #   3.斐波那契数列指的是这样一个数列 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597，2584，4181，6765，10946，17711，28657，46368........
 #   这个数列从第3项开始，每一项都等于前两项之和。又称为“兔子数列”
+
+
+#使用迭代得写法(或称循环写法)
+def B(n):
+    res = [0 for i in range(n+1)]
+
+    res[1] = 1
+    res[2] = 2
+    for i in range(3,n+1):
+        res[i] = res[i-1]+res[i-2]
+    return res[n]
+print(B(10))
+#时间复杂度为O(N)
+
+#使用缓存
+#时间复杂度为O(N)
+a = {}
+def b(n):
+    if n not in a.keys():
+        a[n] = _b(n)
+    return a[n]
+    pass
+def _b(n):
+    if n==1 or n==2 :
+        return n
+    else:
+        return (b(n-1)+b(n-2))
+print(b(10))
