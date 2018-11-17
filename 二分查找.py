@@ -7,7 +7,7 @@ def A(t,n):
 
     return False
 
-#t = [1,2,3,4,5,6,7,8]
+t = [1,2,3,4,5,6,7,8]
 
 #print(A(t,5))
 
@@ -22,34 +22,49 @@ def B(t,n):
         elif t[m] >n:
             right = m - 1
         else:
-            return True
+            return m+1
     return False
-#print(B(t,5))
+print(B(t,7))
 #二分查找的时间复杂度为O(logN)
 #使用递归方法进行二分查找
-def C(t,n):
+def RecursiveBinarySearch(array, t):
     left = 0
-    right = len(t)-1
-    if left<=right:
-        mid = int((left+right)/2)
-        if t[mid]<n:
-            C(t[mid+1:],n)
-        elif t[mid]>n:
-            C(t[:mid-1],n)
-        else:
-            return True
+    right = len(array) - 1
 
-    return False
+    if left>right:
+        return False
+    mid = int((left + right) / 2)
+    if array[mid] < t:
+        return RecursiveBinarySearch(array[mid+1:], t)
+    elif array[mid] > t:
+        return RecursiveBinarySearch(array[:mid], t)
+    else:
+        return mid
+#并不能正确的返回值
 
-#print(C(t,9))
+def HalfSearch(OrderedList, key, left , right):
+    if left > right:
+        return None
+    mid = (left + right) // 2
+    if key == OrderedList[mid]:
+        return mid
+    elif key > OrderedList[mid]:
+        return HalfSearch(OrderedList, key, mid + 1, right)
+    else:
+        return HalfSearch(OrderedList, key, left, mid - 1)
+
+array = [1,2,3,4,5,6,7]
+print(RecursiveBinarySearch(array,6))
+print(HalfSearch(array,3,0,7))
+
 import time
-array = list(range(100000000))
+array = list(range(100000))
 t1 = time.time()
-A(array,100000001)
+A(array,100001)
 t2 = time.time()
 print('线性查找:',t2-t1)
 
 t3 = time.time()
-B(array, 100000001)
+HalfSearch(array, 99999,0,100000)
 t4 = time.time()
 print('二分查找：', t4 - t3)
