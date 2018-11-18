@@ -53,18 +53,19 @@ def HalfSearch(OrderedList, key, left , right):
     else:
         return HalfSearch(OrderedList, key, left, mid - 1)
 
+
 array = [1,2,3,4,5,6,7]
 print(RecursiveBinarySearch(array,6))
-print(HalfSearch(array,3,0,7))
+print(HalfSearch(array,3,0,6))
 
 import time
-array = list(range(100000))
+array = list(range(1000000))
 t1 = time.time()
 A(array,100001)
 t2 = time.time()
 print('线性查找:',t2-t1)
 
 t3 = time.time()
-HalfSearch(array, 99999,0,100000)
+HalfSearch(array, 100000000,0,999999)
 t4 = time.time()
 print('二分查找：', t4 - t3)
