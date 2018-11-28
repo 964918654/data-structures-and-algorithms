@@ -3,12 +3,38 @@
 
 思路：二叉搜索树的特性是所有左子树值都小于中节点，所有右子树的值都大于中节点，递归遍历左子树和右子树的值。
 '''
-class TreeNode:
-    def __init__(self,x):
-        self.val = x
-        self.left = None
-        self.right = None
+
 
 class Solution:
     def IsPostTree(self,array):
-        pass
+        if not array:
+            return False
+        if len(array) == 1:
+            return True
+        i = 0
+        while array[i]<array[-1]:
+            i = i+1
+
+        for j in range(i,len(array)-1):
+            if array[j]<array[-1]:
+                return False
+        #print(i)
+        leftarr = array[:i]
+        #print(leftarr)
+        rightarr = array[i:len(array)-1]
+        #print(rightarr)
+
+
+
+        if len(leftarr)>0:
+            self.IsPostTree(leftarr)
+        if len(rightarr)>0:
+            self.IsPostTree(rightarr)
+        return True
+
+if __name__=='__main__':
+    solution=Solution()
+    num=list(map(int,input().split(' ')))
+
+    ans=solution.IsPostTree(num)
+    print(ans)
